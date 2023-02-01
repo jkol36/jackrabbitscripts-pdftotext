@@ -5,10 +5,13 @@ import subprocess
 import platform
 from sys import exit
 from time import sleep
+import glob
 
 pkg = ''
 
 # Detect if platform is using apt or dnf or pacman package manager.
+directory_name=""
+
 try:
     subprocess.run(['apt', '-v'], capture_output=True).stdout
     pkg = 'apt'
@@ -71,7 +74,7 @@ except Exception as e:
 
 
 # Loop to get names of all PDF files in current working Directory.
-for i in os.listdir():
+for i in os.listdir(directory_name):
     if i[-3:].lower() == 'pdf':
 
         print('\nProcessing', i)
